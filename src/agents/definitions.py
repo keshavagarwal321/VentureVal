@@ -31,8 +31,8 @@ def get_model():
             clean_p = p.replace("models/", "")
             if any(clean_p in m for m in available):
                 return clean_p
-    except:
-        pass
+    except Exception as e:
+        print(f"⚠️ Warning during model detection: {e}")
     return "gemini-1.5-flash"
 
 

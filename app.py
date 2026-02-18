@@ -6,18 +6,20 @@ from src.agents.definitions import create_agents
 # Page Configuration
 st.set_page_config(page_title="VentureVal AI", page_icon="💡", layout="wide")
 
+
 # Helper function to run agents asynchronously
 async def run_agent(agent, prompt):
     runner = InMemoryRunner(agent=agent)
     events = await runner.run_debug(prompt)
     text = ""
     for event in events:
-        if hasattr(event, 'content') and event.content and event.content.parts:
+        if hasattr(event, "content") and event.content and event.content.parts:
             for part in event.content.parts:
-                if hasattr(part, 'text') and part.text:
+                if hasattr(part, "text") and part.text:
                     text += part.text
 
     return text
+
 
 # Main UI
 st.title("🚀 VentureVal")
@@ -29,7 +31,11 @@ with st.sidebar:
     if st.button("Clear Session"):
         st.rerun()
 
-idea = st.text_area("💡 Enter Business Idea:", height=100, placeholder="E.g., A subscription service for authentic Japanese snacks...")
+idea = st.text_area(
+    "💡 Enter Business Idea:",
+    height=100,
+    placeholder="E.g., A subscription service for authentic Japanese snacks...",
+)
 
 if st.button("Validate Now"):
     if not idea:
@@ -42,10 +48,16 @@ if st.button("Validate Now"):
         status = st.status("🤖 AI Agents Active", expanded=True)
 
         status.write("🕵️ **Scout Agent:** Searching global markets...")
-        scout_data = asyncio.run(run_agent(scout, f"Find competitors/risks for: '{idea}'"))
+        scout_data = asyncio.run(
+            run_agent(scout, f"Find competitors/risks for: '{idea}'")
+        )
 
         status.write("⚖️ **Critic Agent:** Analyzing business viability...")
-        report = asyncio.run(run_agent(critic, f"Idea: {idea}\nData: {scout_data}\n\nProvide SWOT and Score."))
+        report = asyncio.run(
+            run_agent(
+                critic, f"Idea: {idea}\nData: {scout_data}\n\nProvide SWOT and Score."
+            )
+        )
 
         status.update(label="✅ Analysis Complete", state="complete", expanded=False)
 

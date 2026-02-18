@@ -12,3 +12,8 @@ dependencies = [
     "python-dotenv>=1.2.1",
     "streamlit>=1.54.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.1",
+]
