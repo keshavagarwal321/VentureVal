@@ -2,6 +2,7 @@ import streamlit as st
 import asyncio
 from google.adk.runners import InMemoryRunner
 from src.agents.definitions import create_agents
+from src.utils.pdf_generator import generate_swot_pdf
 
 # Page Configuration
 st.set_page_config(page_title="VentureVal AI", page_icon="💡", layout="wide")
@@ -64,3 +65,17 @@ if st.button("Validate Now"):
         # Display Report
         st.divider()
         st.markdown(report)
+
+        # --- NEW: PDF Download Button ---
+        st.divider()
+        pdf_bytes = generate_swot_pdf(idea, report)
+
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.download_button(
+                label="📄 Download Executive Report (PDF)",
+                data=pdf_bytes,
+                file_name="VentureVal_Report.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
