@@ -7,7 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "duckduckgo-search>=8.1.1",
     "fpdf>=1.7.2",
-    "google-adk>=1.25.0",
+    "google-adk>=1.28.1",
     "plotly>=6.5.2",
     "python-dotenv>=1.2.1",
     "streamlit>=1.54.0",
