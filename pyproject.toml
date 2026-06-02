@@ -9,7 +9,7 @@ dependencies = [
     "fpdf>=1.7.2",
     "google-adk>=1.25.0",
     "plotly>=6.5.2",
-    "python-dotenv>=1.2.1",
+    "python-dotenv>=1.2.2",
     "streamlit>=1.54.0",
 ]
 
